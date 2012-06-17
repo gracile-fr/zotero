@@ -48,7 +48,7 @@ var ZoteroItemPane = new function() {
 	}
 	
 	function updateRelatedTab (relatedTab, count) {
-		var relatedLabel = relatedTab.getAttribute('label').replace(/(.*?)\s*\([0-9]\)$/,"$1");
+		var relatedLabel = relatedTab.getAttribute('label').replace(/(.*?)\s*\([0-9]*?\)$/,"$1");
 		if (count) {
 			relatedTab.setAttribute('label', relatedLabel + ' (' + count + ')');
 		} else {
