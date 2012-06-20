@@ -20,6 +20,11 @@
 	margin-bottom: .25em !important;
 }
 
+#zotero-view-tabbox tabs tab[childElement="true"]
+{
+	color: #FF0000;
+}
+
 #zotero-view-item
 {
 	padding: 1.5em .25em .25em;

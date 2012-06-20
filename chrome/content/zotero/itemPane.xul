@@ -53,9 +53,9 @@
 			<tabbox id="zotero-view-tabbox" flex="1" onselect="if (!ZoteroPane_Local.collectionsView.selection || event.originalTarget.localName != 'tabpanels') { return; }; ZoteroItemPane.viewItem(ZoteroPane_Local.getSelectedItems()[0], ZoteroPane_Local.collectionsView.editable ? 'edit' : 'view', this.selectedIndex)">
 				<tabs>
 					<tab label="&zotero.tabs.info.label;"/>
-					<tab label="&zotero.tabs.notes.label;"/>
-					<tab label="&zotero.tabs.tags.label;"/>
-					<tab label="&zotero.tabs.related.label;"/>
+					<tab id="zotero-tab-notes" label="&zotero.tabs.notes.label;" childElement="false"/>
+					<tab id="zotero-tab-tags" label="&zotero.tabs.tags.label;" childElement="false"/>
+					<tab id="zotero-tab-related" label="&zotero.tabs.related.label;" childElement="false"/>
 				</tabs>
 					<tabpanels id="zotero-view-item" flex="1">
 						<tabpanel>

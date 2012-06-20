@@ -47,6 +47,32 @@ var ZoteroItemPane = new function() {
 		_relatedBox = document.getElementById('zotero-editpane-related');
 	}
 	
+	function updateRelatedTab (relatedTab, count) {
+		//var relatedLabel = relatedTab.getAttribute('label').replace(/(.*?)\s*\([0-9]\)$/,"$1");
+		if (count) {
+			relatedTab.setAttribute('childElement', 'true');
+		} else {
+			relatedTab.setAttribute('childElement', 'false');
+		}
+	}
+	
+	function updateTagsTab (tagsTab, count) {
+		//var relatedLabel = relatedTab.getAttribute('label').replace(/(.*?)\s*\([0-9]\)$/,"$1");
+		if (count) {
+			tagsTab.setAttribute('childElement', 'true');
+		} else {
+			tagsTab.setAttribute('childElement', 'false');
+		}
+	}
+	
+	function updateNotesTab (notesTab, count) {
+		//var relatedLabel = relatedTab.getAttribute('label').replace(/(.*?)\s*\([0-9]\)$/,"$1");
+		if (count) {
+			notesTab.setAttribute('childElement', 'true');
+		} else {
+			notesTab.setAttribute('childElement', 'false');
+		}
+	}
 	
 	/*
 	 * Load an item
@@ -144,6 +170,38 @@ var ZoteroItemPane = new function() {
 			box.mode = 'edit';
 		}
 		box.item = item;
+		
+		// RELATED: Update the related items count on the tab when any panel is opened or modified.
+		var relatedTab = document.getElementById('zotero-tab-related');
+		var related = item.relatedItemsBidirectional ? item.relatedItemsBidirectional.length : 0;
+		updateRelatedTab(relatedTab, related);
+		if (box.getAttribute('id') == "zotero-editpane-related") {
+			// Attach the tab update function and the tab to the related box for its use
+			box.relatedTab = relatedTab;
+			box.updateRelatedTab = updateRelatedTab;
+		}
+		
+		// TAGS: Update the tags items count on the tab when any panel is opened or modified.
+		var tagsTab = document.getElementById('zotero-tab-tags');
+		var tags = item.getTags() ? item.getTags().length : 0;
+		updateTagsTab(tagsTab, tags);
+		if (box.getAttribute('id') == "zotero-editpane-tags") {
+			// Attach the tab update function and the tab to the tags box for its use
+			box.tagsTab = tagsTab;
+			box.updateTagsTab = updateTagsTab;
+		}
+		
+ 		// NOTES: Update the notes items count on the tab when any panel is opened or modified.
+		var notesTab = document.getElementById('zotero-tab-notes');
+		var notes = item.getNotes() ? item.getNotes().length : 0;
+		//var notes = document.getElementById('zotero-editpane-dynamic-notes').childNodes ? document.getElementById('zotero-editpane-dynamic-notes').childNodes.length : 0;
+		//document.getElementById('zotero-editpane-dynamic-notes').childNodes.length
+		updateNotesTab(notesTab, notes);
+		if (box.getAttribute('id') == "zotero-editpane-notes") {
+			// Attach the tab update function and the tab to the notes box for its use
+			box.notesTab = notesTab;
+			box.updateNotesTab = updateNotesTab;
+		}
 	}
 	
 	
@@ -163,7 +221,7 @@ var ZoteroItemPane = new function() {
 	
 	
 	function _updateNoteCount() {
-		var c = _notesList.childNodes.length;
+		c = _notesList.childNodes.length;
 		
 		var str = 'pane.item.notes.count.';
 		switch (c){
@@ -179,6 +237,11 @@ var ZoteroItemPane = new function() {
 		}
 		
 		_notesLabel.value = Zotero.getString(str, [c]);
+		//Actualise l'affichage qd une note est ajoutée (utile à ce moment là mais le fait systématiquement)
+		if (this.updateNotesTab) {
+			this.updateNotesTab(this.notesTab, c);
+			Zotero.debug('##FONCTION updateNotesTab');
+		}
 	}
 }   
 
