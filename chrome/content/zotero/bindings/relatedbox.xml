@@ -271,10 +271,8 @@
 								break;
 						}
 						this.id('seeAlsoNum').value = Zotero.getString(str, [count]);
-						//Actualise l'affichage qd un related est ajouté (utile à ce moment là mais le fait systématiquement)
 						if (this.updateRelatedTab) {
 							this.updateRelatedTab(this.relatedTab, count);
-							Zotero.debug('##FONCTION updateRelatedTab');
 						}
 					]]>
 				</body>

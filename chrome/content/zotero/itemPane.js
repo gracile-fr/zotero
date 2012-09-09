@@ -49,7 +49,6 @@ var ZoteroItemPane = new function() {
 	}
 	
 	function updateRelatedTab (relatedTab, count) {
-		//var relatedLabel = relatedTab.getAttribute('label').replace(/(.*?)\s*\([0-9]\)$/,"$1");
 		if (count) {
 			relatedTab.setAttribute('childElement', 'true');
 		} else {
@@ -58,7 +57,6 @@ var ZoteroItemPane = new function() {
 	}
 	
 	function updateTagsTab (tagsTab, count) {
-		//var relatedLabel = relatedTab.getAttribute('label').replace(/(.*?)\s*\([0-9]\)$/,"$1");
 		if (count) {
 			tagsTab.setAttribute('childElement', 'true');
 		} else {
@@ -67,7 +65,6 @@ var ZoteroItemPane = new function() {
 	}
 	
 	function updateNotesTab (notesTab, count) {
-		//var relatedLabel = relatedTab.getAttribute('label').replace(/(.*?)\s*\([0-9]\)$/,"$1");
 		if (count) {
 			notesTab.setAttribute('childElement', 'true');
 		} else {
@@ -199,8 +196,6 @@ var ZoteroItemPane = new function() {
  		// NOTES: Update the notes items count on the tab when any panel is opened or modified.
 		var notesTab = document.getElementById('zotero-tab-notes');
 		var notes = item.getNotes() ? item.getNotes().length : 0;
-		//var notes = document.getElementById('zotero-editpane-dynamic-notes').childNodes ? document.getElementById('zotero-editpane-dynamic-notes').childNodes.length : 0;
-		//document.getElementById('zotero-editpane-dynamic-notes').childNodes.length
 		updateNotesTab(notesTab, notes);
 		if (box.getAttribute('id') == "zotero-editpane-notes") {
 			// Attach the tab update function and the tab to the notes box for its use
@@ -242,10 +237,8 @@ var ZoteroItemPane = new function() {
 		}
 		
 		_notesLabel.value = Zotero.getString(str, [c]);
-		//Actualise l'affichage qd une note est ajoutée (utile à ce moment là mais le fait systématiquement)
 		if (this.updateNotesTab) {
 			this.updateNotesTab(this.notesTab, c);
-			Zotero.debug('##FONCTION updateNotesTab');
 		}
 	}
 }   

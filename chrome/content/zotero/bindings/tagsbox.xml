@@ -606,9 +606,7 @@
 						
 						this.id('tagsNum').value = Zotero.getString(str, [count]);
 						this.count = count;
-						//Actualise l'affichage qd un related est ajouté (utile à ce moment là mais le fait systématiquement)
 						if (this.updateTagsTab) {
-							Zotero.debug('##FONCTION updateTagsTab');
 							this.updateTagsTab(this.tagsTab, count);
 						}
 					]]>
