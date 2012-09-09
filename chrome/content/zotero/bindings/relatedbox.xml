@@ -255,7 +255,7 @@
 				<body>
 					<![CDATA[
 						if (count == null) {
-							count = this.item.relatedItemsBidirectional.length;
+							var count = this.item.relatedItemsBidirectional.length;
 						}
 						
 						var str = 'pane.item.related.count.';

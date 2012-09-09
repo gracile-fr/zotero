@@ -40,6 +40,7 @@ var ZoteroItemPane = new function() {
 		}
 		
 		_itemBox = document.getElementById('zotero-editpane-item-box');
+		_notesBox = document.getElementById('zotero-editpane-notes-box');
 		_notesLabel = document.getElementById('zotero-editpane-notes-label');
 		_notesButton = document.getElementById('zotero-editpane-notes-add');
 		_notesList = document.getElementById('zotero-editpane-dynamic-notes');
@@ -87,6 +88,10 @@ var ZoteroItemPane = new function() {
 		switch (index) {
 			case 0:
 				var box = _itemBox;
+				break;
+			
+			case 1:
+				var box = _notesBox;
 				break;
 			
 			case 2:
@@ -160,14 +165,14 @@ var ZoteroItemPane = new function() {
 			}
 			
 			_updateNoteCount();
-			return;
-		}
-		
-		if (mode) {
-			box.mode = mode;
-		}
-		else {
-			box.mode = 'edit';
+			} else {
+			
+			if (mode) {
+				box.mode = mode;
+			}
+			else {
+				box.mode = 'edit';
+			}
 		}
 		box.item = item;
 		
@@ -221,7 +226,7 @@ var ZoteroItemPane = new function() {
 	
 	
 	function _updateNoteCount() {
-		c = _notesList.childNodes.length;
+		var c = _notesList.childNodes.length;
 		
 		var str = 'pane.item.notes.count.';
 		switch (c){
